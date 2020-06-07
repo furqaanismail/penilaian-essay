@@ -54,7 +54,7 @@ class Handler extends ExceptionHandler
         if ($exception instanceof \Symfony\Component\HttpFoundation\File\Exception\FileException) {
             // create a validator and validate to throw a new ValidationException
             return Validator::make($request->all(), [
-                'your_file_input' => 'required|file|size:5000',
+                'file' => 'required|file|size:5000',
             ])->validate();
         }
         return parent::render($request, $exception);

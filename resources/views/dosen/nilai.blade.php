@@ -1,6 +1,6 @@
 @extends('master_dosen')
 @extends('header')
-@section('judul','Penilaian ESSAY - dosen')
+@section('judul','Dosen - Nilai')
 
 @section('konten')
 

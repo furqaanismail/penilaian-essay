@@ -115,7 +115,10 @@
 
 {{--function generate--}}
 <script>
-
+    function generate() {
+        var x = document.getElementById("kategori").value;
+        document.getElementById("kode").value = x;
+    }
 </script>
 
 </body>

@@ -24,7 +24,6 @@ Route::prefix('admin')->group(function () {
     //admin
     Route::get('/', 'AdminController@index');
     Route::get('auth', 'AdminController@auth');
-    Route::get('register', 'AdminController@register');
     Route::post('proses_login', 'AdminController@proses_login');
     Route::get('logout', 'AdminController@logout');
     Route::get('profile', 'AdminController@profile');

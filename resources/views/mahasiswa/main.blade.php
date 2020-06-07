@@ -1,6 +1,6 @@
 @extends('master_mhs')
 @extends('header')
-@section('judul','Penilaian Essay - Dashboard')
+@section('judul','Mahasiswa - Dashboard')
 
 @section('konten')
 

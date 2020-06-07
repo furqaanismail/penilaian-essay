@@ -1,7 +1,6 @@
 @extends('master_mhs')
 @extends('header')
-@section('judul','Penilaian ESSAY - mahasiswa')
-
+@section('judul','Mahasiswa - Detail Ujian')
 @section('konten')
 
     <!-- Begin Page Content -->
@@ -21,37 +20,37 @@
                     <table class="align-items-center" style="margin: auto; width: 50%!important;">
                         <tr>
                             <th>No Ujian</th>
-                            <td>&emsp; : </td>
+                            <td>&emsp; :</td>
                             <td>&ensp; {{$ujian->no_ujian}}</td>
                         </tr>
                         <tr>
                             <th>Nama Ujian</th>
-                            <td>&emsp; : </td>
+                            <td>&emsp; :</td>
                             <td>&ensp; {{$ujian->nama_ujian}}</td>
                         </tr>
                         <tr>
                             <th>Waktu Ujian</th>
-                            <td>&emsp; : </td>
+                            <td>&emsp; :</td>
                             <td>&ensp; {{$ujian->waktu}} menit</td>
                         </tr>
                         <tr>
                             <th>Nilai Per Soal</th>
-                            <td>&emsp; : </td>
+                            <td>&emsp; :</td>
                             <td>&ensp; {{$ujian->nilai_per_soal}}</td>
                         </tr>
                         <tr>
                             <th>Jumlah Soal</th>
-                            <td>&emsp; : </td>
+                            <td>&emsp; :</td>
                             <td>&ensp; {{$ujian->jml_soal}}</td>
                         </tr>
                         <tr>
                             <th>Mata Kuliah</th>
-                            <td>&emsp; : </td>
+                            <td>&emsp; :</td>
                             <td>&ensp; {{$ujian->matkul}}</td>
                         </tr>
                         <tr>
-                            <th>Dosen </th>
-                            <td>&emsp; : </td>
+                            <th>Dosen</th>
+                            <td>&emsp; :</td>
                             <td>&ensp; {{$ujian->dosen->nama}}</td>
                         </tr>
                     </table>

@@ -1,6 +1,6 @@
 @extends('master_mhs')
 @extends('header')
-@section('judul','Mahasiswa - Jawab Soal')
+@section('judul','Mahasiswa - Baca Materi')
 
 @section('konten')
 

@@ -1,6 +1,6 @@
 @extends('master')
 @extends('header')
-@section('judul','Admin - Dosen')
+@section('judul','Penilaian Essay - Admin')
 
 @php
 $pass = Hash::make($mhs->password);

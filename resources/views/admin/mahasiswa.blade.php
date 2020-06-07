@@ -1,6 +1,6 @@
 @extends('master')
 @extends('header')
-@section('judul','Penilaian ESSAY - dosen')
+@section('judul','Penilaian Essay - Admin')
 
 @section('konten')
 
@@ -39,7 +39,7 @@
                                                         <td>{{$data->jk}}</td>
                                                         <td>
                                                             <a href="/admin/edit_mahasiswa/{{$data->id}}" class="btn btn-warning"><i class="fas fa-fw fa-edit"></i></a>
-                                                            <a href="/user/delete_mahasiswa/{{$data->id}}" class="btn btn-danger"><i class="fas fa-fw fa-trash"></i></a>
+                                                            <a href="/admin/delete_mahasiswa/{{$data->id}}" class="btn btn-danger"><i class="fas fa-fw fa-trash"></i></a>
                                                         </td>
                                                     </tr>
                                                 </tbody>

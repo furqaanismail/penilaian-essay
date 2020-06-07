@@ -20,7 +20,7 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/admin">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
@@ -37,14 +37,14 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user" aria-expanded="true" aria-controls="collapseTwo">
+            <a class="nav-link active collapsed" href="#" data-toggle="collapse" data-target="#user" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-user"></i>
                 <span>User</span>
             </a>
             <div id="user" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Managament User:</h6>
-                    <a class="collapse-item" href="/admin/dosen">Dosen</a>
+                    <a class="collapse-item " href="/admin/dosen">Dosen</a>
                     <a class="collapse-item" href="/admin/mahasiswa">Mahasiswa</a>
                 </div>
             </div>

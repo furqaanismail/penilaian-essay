@@ -1,5 +1,5 @@
 @extends('master_auth')
-@section('judul','Essay - Login')
+@section('judul','Penilaian Essay - Admin')
 @section('konten')
     <div class="container">
 

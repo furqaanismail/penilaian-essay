@@ -15,7 +15,7 @@ class CreateJawabanTable extends Migration
     {
         Schema::create('jawaban', function (Blueprint $table) {
             $table->id();
-            $table->text('jawaban');
+            $table->text('jawaban')->nullable();
             $table->string('mahasiswa_id', 15);
             $table->foreign('mahasiswa_id')->references('nim')->on('mahasiswa');
             $table->string('ket_ujian_id');

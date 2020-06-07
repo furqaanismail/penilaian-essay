@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Session;
 
 class MahasiswaController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('mahasiswa/login');
     }
 
@@ -41,18 +42,21 @@ class MahasiswaController extends Controller
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         Session::flush();
         return redirect('/mahasiswa/auth');
     }
 
-    public function register(){
+    public function register()
+    {
         return view('mahasiswa/register');
     }
 
-    public function proses_register(Request $request){
+    public function proses_register(Request $request)
+    {
         $this->validate($request, [
-           'nim' => 'required|unique:mahasiswa',
+            'nim' => 'required|unique:mahasiswa',
             'nama' => 'required',
             'password' => 'required',
             'password2' => 'required|same:password'
@@ -66,75 +70,134 @@ class MahasiswaController extends Controller
         return redirect('mahasiswa/auth');
     }
 
-    public function profile(){
-        return view('mahasiswa/profile');
-    }
-
-    public function materi(){
-        $data = Materi::all();
-        return view('mahasiswa/materi', ['materi' => $data]);
-    }
-
-    public function detail_materi($id){
-        $data = Materi::find($id);
-        $dosen = Dosen::all();
-        return view('mahasiswa/detail_materi',['materi'=>$data, 'dosen' => $dosen]);
-    }
-
-
-    public function ujian(){
-        $data = KetUjian::all();
-        $mhs = Session::get('nim');
-        $jawaban = Jawaban::where('mahasiswa_id', $mhs)->get();
-        return view('mahasiswa/ujian', ['ujian' => $data, 'jawaban' => $jawaban]);
-    }
-
-    public function detail_ujian($id){
-        $ujian = KetUjian::find($id);
-        return view('mahasiswa/detail_ujian',['ujian' => $ujian]);
-    }
-
-    public function soal($id){
-        $soal = Soal::all();
-        $ujian = KetUjian::find($id);
-        $no = $id;
-        return view('mahasiswa/soal',['soal' => $soal , 'no' => $no, 'ujian' => $ujian] );
-    }
-
-    public function store(Request $request){
-        $this->validate($request, [
-            'jawaban' => 'required'
-        ]);
-
-        $soal = $request->soal;
-        $jawaban = $request->jawaban;
-        $no = $request->no;
-        $jml = $request->input('jml');
-        for ($i=1; $i<= $jml; $i++){
-            $data = new Jawaban();
-            $data->jawaban = $jawaban[$i];
-            $data->mahasiswa_id = Session::get('nim');
-            $data->nilai = "20";
-            $data->ket_ujian_id = $no;
-            $data->save();
+    public function profile()
+    {
+        if (Session::get('nim')) {
+            return view('mahasiswa/profile');
+        } else {
+            return redirect('mahasiswa/auth');
         }
-        $nilai = new Nilai();
-        $nilai->nilai = "100";
-        $nilai->mahasiswa_id = Session::get('nim');
-        $nilai->ket_ujian_id = $no;
-        $nilai->save();
-        return redirect('/mahasiswa/hasil_ujian/'.$no);
     }
 
-   public function metode_vsm(){
+    public function materi()
+    {
+        if (Session::get('nim')) {
+            $data = Materi::all();
+            return view('mahasiswa/materi', ['materi' => $data]);
+        } else {
+            return redirect('mahasiswa/auth');
+        }
+    }
 
-   }
+    public function detail_materi($id)
+    {
+        if (Session::get('nim')) {
+            $data = Materi::find($id);
+            $dosen = Dosen::all();
+            return view('mahasiswa/detail_materi', ['materi' => $data, 'dosen' => $dosen]);
+        } else {
+            return redirect('mahasiswa/auth');
+        }
+    }
 
-   public function hasil($id){
-        $nim = Session::get('nim');
-       $jawaban = Jawaban::where('mahasiswa_id', $nim)->where('ket_ujian_id', $id)->get();
-       return view('mahasiswa/hasil_ujian', ['jawaban' => $jawaban]);
-   }
+
+    public function ujian()
+    {
+        if (Session::get('nim')) {
+            $data = KetUjian::all();
+            $mhs = Session::get('nim');
+            $jawaban = Jawaban::where('mahasiswa_id', $mhs)->get();
+            return view('mahasiswa/ujian', ['ujian' => $data, 'jawaban' => $jawaban]);
+        } else {
+            return redirect('mahasiswa/auth');
+        }
+    }
+
+    public function detail_ujian($id)
+    {
+        if (Session::get('nim')) {
+            $ujian = KetUjian::find($id);
+            return view('mahasiswa/detail_ujian', ['ujian' => $ujian]);
+        } else {
+            return redirect('mahasiswa/auth');
+        }
+    }
+
+    public function soal($id)
+    {
+        if (Session::get('nim')) {
+            $soal = Soal::all();
+            $ujian = KetUjian::find($id);
+            $no = $id;
+            //mebuat session mulai
+            if (Session::get('mulai')) {
+                $telah_berlalu = time() - Session::get('mulai');
+            } else {
+                Session::put('mulai', time());
+                $telah_berlalu = 0;
+            }
+
+            $temp_waktu = ($ujian->waktu * 60) - $telah_berlalu;
+            $temp_menit = (int)($temp_waktu / 60);
+            $temp_detik = $temp_waktu % 60;
+            if ($temp_menit < 60) {
+                $jam = 0;
+                $menit = $temp_menit;
+                $detik = $temp_detik;
+            } else {
+                $jam = (int)($temp_menit / 60);
+                $menit = $temp_menit % 60;
+                $detik = $temp_detik;
+            }
+            return view('mahasiswa/soal', ['soal' => $soal, 'no' => $no, 'ujian' => $ujian, 'jam' => $jam, 'menit' => $menit, 'detik' => $detik]);
+        } else {
+            return redirect('mahasiswa/auth');
+        }
+    }
+
+    public function store(Request $request)
+    {
+        if (Session::get('nim')) {
+
+            $soal = $request->soal;
+            $jawaban = $request->jawaban;
+            $no = $request->no;
+            $jml = $request->input('jml');
+            for ($i = 1; $i <= $jml; $i++) {
+                $data = new Jawaban();
+                $data->jawaban = $jawaban[$i];
+                $data->mahasiswa_id = Session::get('nim');
+                $data->nilai = "20";
+                $data->ket_ujian_id = $no;
+                $data->save();
+            }
+            $nilai = new Nilai();
+            $nilai->nilai = "100";
+            $nilai->mahasiswa_id = Session::get('nim');
+            $nilai->ket_ujian_id = $no;
+            $nilai->save();
+            return redirect('/mahasiswa/hasil_ujian/' . $no);
+        } else {
+            return redirect('mahasiswa/auth');
+        }
+    }
+
+    public function metode_vsm()
+    {
+
+    }
+
+    public function hasil($id)
+    {
+        if (Session::get('nim')) {
+            $nim = Session::get('nim');
+            $jawaban = Jawaban::where('mahasiswa_id', $nim)->where('ket_ujian_id', $id)->get();
+            return view('mahasiswa/hasil_ujian', ['jawaban' => $jawaban]);
+        } else {
+            return redirect('mahasiswa/auth');
+        }
+
+    }
 
 
 }

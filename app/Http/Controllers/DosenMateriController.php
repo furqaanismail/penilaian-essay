@@ -14,72 +14,60 @@ class DosenMateriController extends Controller
 
     public function index()
     {
-        $data = Materi::all();
-        return view('dosen/materi',['dosen'=>$data]);
+        if(Session::get('nip')) {
+            $data = Materi::all();
+            return view('dosen/materi', ['dosen' => $data]);
+        }else{
+            return redirect('dosen/auth');
+        }
     }
 
     public function show($id){
-        $data = Materi::find($id);
-        $dosen = Dosen::all();
-        return view('dosen/materi_edit',['materi'=>$data, 'dosen' => $dosen]);
+        if(Session::get('nip')) {
+            $data = Materi::find($id);
+            $dosen = Dosen::all();
+            return view('dosen/materi_edit', ['materi' => $data, 'dosen' => $dosen]);
+        }else{
+            return redirect('dosen/auth');
+        }
     }
 
     public function create(Request $request){
-        $materi = Materi::all();
-        $dosen = Dosen::all();
-        return view('dosen/materi_add',['materi' => $materi, 'dosen' => $dosen]);
+        if(Session::get('nip')) {
+            $materi = Materi::all();
+            $dosen = Dosen::all();
+            return view('dosen/materi_add', ['materi' => $materi, 'dosen' => $dosen]);
+        }else{
+            return redirect('dosen/auth');
+        }
     }
 
     public function store(Request $request){
-        $this->validate($request, [
-            'topik' => 'required',
-            'isi_materi' => 'required',
-            'file' => 'required',
-            'matkul' => 'required'
-        ]);
+        if(Session::get('nip')) {
+            $this->validate($request, [
+                'topik' => 'required',
+                'isi_materi' => 'required',
+                'file' => 'required',
+                'matkul' => 'required'
+            ]);
 
-        $data = new Materi();
-        $data->topik = $request->input('topik');
-        $data->isi_materi = $request->input('isi_materi');
-        if($request->hasFile('file')){
-            $file = requet::file('file');
-            $filename = $file->getClientOriginalName();
-            $path = public_path().'/uploads/';
-            $data->video = $filename;
-            $file->move($path, $filename);
+            $data = new Materi();
+            $data->topik = $request->input('topik');
+            $data->isi_materi = $request->input('isi_materi');
+            if ($request->hasFile('file')) {
+                $file = requet::file('file');
+                $filename = $file->getClientOriginalName();
+                $path = public_path() . '/uploads/';
+                $data->video = $filename;
+                $file->move($path, $filename);
+            }
+            $data->dosen_id = Session::get('id');
+            $data->matkul = $request->input('matkul');
+            $data->save();
+            return redirect('/dosen/materi');
+        }else{
+            return redirect('dosen/auth');
         }
-        $data->dosen_id = Session::get('id');
-        $data->matkul = $request->input('matkul');
-        $data->save();
-        return redirect('/dosen/materi');
     }
 
-    public function update(Request $request, $id)
-    {
-        $this->validate($request, [
-            'topik' => 'required',
-            'isi_materi' => 'required',
-            'file' => 'required'
-        ]);
-
-        $data = Materi::find($id);
-        $data->topik = $request->input('topik');
-        $data->isi_materi = $request->input('isi_materi');
-        if($request->hasFile('file')){
-            $file = requet::file('file');
-            $filename = $file->getClientOriginalName();
-            $path = public_path().'/uploads/';
-            $data->video = $filename;
-            $file->move($path, $filename);
-        }
-        $data->matkul = $request->input('matkul');
-        $data->save();
-        return redirect('/dosen/materi');
-    }
-
-    public function destroy($id){
-        $data = Materi::find($id);
-        $data->delete();
-        return redirect('/dosen/materi');
-    }
 }

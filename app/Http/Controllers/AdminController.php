@@ -12,11 +12,17 @@ use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
+
     public function index()
     {
-        $mhs = Mahasiswa::all();
-        $dosen = Dosen::all();
-        return view('admin/main', ['mhs' => $mhs, 'dosen' => $dosen]);
+        if(Session::has('username')){
+            $mhs = Mahasiswa::all();
+            $dosen = Dosen::all();
+            return view('admin/main', ['mhs' => $mhs, 'dosen' => $dosen]);
+        }else{
+            return redirect('admin/auth');
+        }
+
     }
 
     public function auth()
@@ -55,7 +61,11 @@ class AdminController extends Controller
     }
 
     public function profile(){
-        return view('admin/profile');
+        if(Session::has('username')) {
+            return view('admin/profile');
+        }else{
+            return redirect('admin/auth');
+        }
     }
 
 }
