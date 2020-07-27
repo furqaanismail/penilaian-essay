@@ -263,6 +263,7 @@
                         var formSoal = document.getElementById("#form_soal");
                         alert('Waktu Telah Habis.');
                         formSoal.submit();
+                        window.location.href('/');
                     }
                 }
             }
