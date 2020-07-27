@@ -14,13 +14,9 @@ use Illuminate\Support\Facades\Session;
 class DosenController extends Controller
 {
     public function index(){
-        if(Session::get('nip')) {
             $ujian = KetUjian::all();
             $materi = Materi::all();
             return view('dosen/main', ['ujian' => $ujian, 'materi' => $materi]);
-        }else{
-            return redirect('dosen/auth');
-        }
     }
 
     public function auth(){
@@ -74,11 +70,7 @@ class DosenController extends Controller
     }
 
     public function profile(){
-        if(Session::get('nip')) {
             return view('dosen/profile');
-        }else{
-            return redirect('dosen/auth');
-        }
     }
 
 }

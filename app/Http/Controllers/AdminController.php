@@ -15,14 +15,9 @@ class AdminController extends Controller
 
     public function index()
     {
-        if(Session::has('username')){
             $mhs = Mahasiswa::all();
             $dosen = Dosen::all();
             return view('admin/main', ['mhs' => $mhs, 'dosen' => $dosen]);
-        }else{
-            return redirect('admin/auth');
-        }
-
     }
 
     public function auth()

@@ -81,12 +81,8 @@ class MahasiswaController extends Controller
 
     public function materi()
     {
-        if (Session::get('nim')) {
             $data = Materi::all();
             return view('mahasiswa/materi', ['materi' => $data]);
-        } else {
-            return redirect('mahasiswa/auth');
-        }
     }
 
     public function detail_materi($id)
@@ -162,17 +158,26 @@ class MahasiswaController extends Controller
             $soal = $request->soal;
             $jawaban = $request->jawaban;
             $no = $request->no;
+            $poin = $request->nilai_per_soal;
             $jml = $request->input('jml');
+            $kunci = $request->kunci;
+
+            $sum = 0;
             for ($i = 1; $i <= $jml; $i++) {
+                // rumus vsm
+                similar_text($kunci[$i], $jawaban[$i],$persen);
+                $hsl = round(round($persen)/100*($poin));
                 $data = new Jawaban();
                 $data->jawaban = $jawaban[$i];
                 $data->mahasiswa_id = Session::get('nim');
-                $data->nilai = "20";
+                $data->nilai = $hsl;
                 $data->ket_ujian_id = $no;
                 $data->save();
+                $sum+=$hsl;
             }
+
             $nilai = new Nilai();
-            $nilai->nilai = "100";
+            $nilai->nilai = $sum;
             $nilai->mahasiswa_id = Session::get('nim');
             $nilai->ket_ujian_id = $no;
             $nilai->save();

@@ -16,27 +16,18 @@ class DosenSoalController extends Controller
 
     public function index()
     {
-        if(Session::get('nip')) {
             $soal = Soal::all();
             $data = KetUjian::all();
             return view('dosen/soal', ['ket' => $data, 'soal' => $soal]);
-        }else{
-            return redirect('dosen/auth');
-        }
     }
 
     public function show($id){
-        if(Session::get('nip')) {
             $ujian = KetUjian::find($id);
             $soal = Soal::all();
             return view('dosen/soal_edit', ['ujian' => $ujian, 'soal' => $soal]);
-        }else{
-            return redirect('dosen/auth');
-        }
     }
 
     public function create(Request $request){
-        if(Session::get('nip')) {
             $ujian = KetUjian::all();
             $awal = "UJN-00";
             $no = 1;
@@ -46,13 +37,9 @@ class DosenSoalController extends Controller
                 $kode = $awal . $no;
             }
             return view('dosen/soal_add', ['kode' => $kode]);
-        }else{
-            return redirect('dosen/auth');
-        }
     }
 
     public function store(Request $request){
-        if(Session::get('nip')) {
             $this->validate($request, [
                 'nama' => 'required',
                 'waktu' => 'required',
@@ -81,9 +68,6 @@ class DosenSoalController extends Controller
                 $data->save();
             }
             return redirect('/dosen/soal');
-        }else{
-            return redirect('dosen/auth');
-        }
     }
 
 }

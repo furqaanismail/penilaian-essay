@@ -140,6 +140,12 @@
                                             <input type="hidden" class="form-control" id="no" name="no" value="{{$ujian->no_ujian}}">
                                         </div>
                                         <div class="form-group">
+                                            <input type="hidden" class="form-control" id="no" name="nilai_per_soal" value="{{$ujian->nilai_per_soal}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="hidden" class="form-control" id="no" name="kunci[{{$no}}]" value="{{$data->kunci}}">
+                                        </div>
+                                        <div class="form-group">
                                             <label for="level">Soal ke - {{$no}}</label>
                                             <div>{{$data->soal}}</div>
                                             <input type="hidden" class="form-control" id="soal[{{$no}}]" name="soal" value="{{$data->soal}}">

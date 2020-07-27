@@ -14,36 +14,23 @@ class DosenMateriController extends Controller
 
     public function index()
     {
-        if(Session::get('nip')) {
             $data = Materi::all();
             return view('dosen/materi', ['dosen' => $data]);
-        }else{
-            return redirect('dosen/auth');
-        }
     }
 
     public function show($id){
-        if(Session::get('nip')) {
             $data = Materi::find($id);
             $dosen = Dosen::all();
             return view('dosen/materi_edit', ['materi' => $data, 'dosen' => $dosen]);
-        }else{
-            return redirect('dosen/auth');
-        }
     }
 
     public function create(Request $request){
-        if(Session::get('nip')) {
             $materi = Materi::all();
             $dosen = Dosen::all();
             return view('dosen/materi_add', ['materi' => $materi, 'dosen' => $dosen]);
-        }else{
-            return redirect('dosen/auth');
-        }
     }
 
     public function store(Request $request){
-        if(Session::get('nip')) {
             $this->validate($request, [
                 'topik' => 'required',
                 'isi_materi' => 'required',
@@ -65,9 +52,6 @@ class DosenMateriController extends Controller
             $data->matkul = $request->input('matkul');
             $data->save();
             return redirect('/dosen/materi');
-        }else{
-            return redirect('dosen/auth');
-        }
     }
 
 }

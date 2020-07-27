@@ -16,28 +16,19 @@ class AdminSoalController extends Controller
 
     public function index()
     {
-        if(Session::get('username')) {
             $soal = Soal::all();
             $data = KetUjian::all();
             return view('admin/soal', ['ket' => $data, 'soal' => $soal]);
-        }else{
-            return redirect('admin/auth');
-        }
     }
 
     public function show($id){
-        if(Session::get('username')) {
             $ujian = KetUjian::find($id);
             $soal = Soal::all();
             return view('admin/edit_soal', ['ujian' => $ujian, 'soal' => $soal]);
-        }else{
-            return redirect('admin/auth');
-        }
     }
 
     public function update(Request $request, $id)
     {
-        if(Session::get('username')) {
             $this->validate($request, [
                 'nama' => 'required',
                 'waktu' => 'required',
@@ -66,20 +57,13 @@ class AdminSoalController extends Controller
             }
 
             return redirect('/admin/soal');
-        }else{
-            return redirect('admin/auth');
-        }
     }
 
     public function destroy($id){
-        if(Session::get('username')) {
             $data = Soal::where('ket_ujian_id', $id)->delete();
             $jawaban = Jawaban::where('ket_ujian_id', $id)->delete();
             $nilai = Nilai::where('ket_ujian_id', $id)->delete();
             $data2 = KetUjian::find($id)->delete();
             return redirect('/admin/soal');
-        }else{
-            return redirect('admin/auth');
-        }
     }
 }
