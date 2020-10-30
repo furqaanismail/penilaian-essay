@@ -56,7 +56,22 @@
                         </div>
                     </div>
 
-                    <button type="submit" id="add_materi" class="btn btn-primary float-right mr-2 mt-2">Tambah</button>
+                    <div class="form-group">
+                        <label class="d-block">Upload Gambar</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Upload</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" name="image" class="custom-file-input" id="inputGroupFile01">
+                                <label class="custom-file-label" for="inputGroupFile01">Choose Image</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="add_materi" class="btn btn-primary float-right mr-2 mt-2">Simpan Materi</button>
+
+
                     <input type="hidden" value="{{ csrf_token() }}" name="_token">
 
                 </form>

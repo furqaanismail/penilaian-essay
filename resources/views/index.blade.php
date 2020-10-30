@@ -22,7 +22,7 @@
 
 </head>
 
-<body >
+<body style="background-image: url('{{asset('asset/img/background2.jpg')}}'); background-position:center; background-repeat: no-repeat; background-size: cover;">
 
 {{--judul--}}
     <div class="display-1 text-white">
@@ -31,8 +31,8 @@
 
 {{--konten--}}
     <div class="container align-content-center">
-        <div class="row">
-            <div class="col-sm">
+        <div class="row mx-auto">
+            {{-- <div class="col-sm">
                 <a href="/admin/auth" class="text-dark btn">
                     <div class="card shadow" style="width: 18rem; height: 18rem;">
                         <img class="card-img-top ml-1" style="height: 12rem; width: 17rem;" src="{{asset('asset/img/admin.png')}}" alt="Card image cap">
@@ -41,9 +41,9 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> --}}
 
-            <div class="col-sm">
+            <div class="col-7 ml-5">
                 <a href="/dosen/auth" class="text-dark btn">
                     <div class="card shadow" style="width: 18rem; height: 18rem;">
                         <img class="card-img-top mt-2"  src="{{asset('asset/img/teachers.png')}}" alt="Card image cap">
@@ -54,7 +54,7 @@
                 </a>
             </div>
 
-            <div class="col-sm">
+            <div class="col-4">
                 <a href="/mahasiswa/auth" class="text-dark btn">
                     <div class="card shadow" style="width: 18rem; height: 18rem;">
                         <img class="card-img-top ml-3" style="height: 12rem; width: 15rem;" src="{{asset('asset/img/student.png')}}" alt="Card image cap">

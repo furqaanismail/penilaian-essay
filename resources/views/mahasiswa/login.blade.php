@@ -1,7 +1,7 @@
 @extends('master_auth')
 @section('judul','Mahasiswa - Login')
 @section('konten')
-    <div class="container">
+    <div class="jumbotron" style="background-image: url('{{asset('asset/img/background3.jpg')}}'); background-position:center; background-repeat: no-repeat; background-size: cover; margin-bottom: -10px;">
 
         <!-- Outer Row -->
         <div class="row justify-content-center">

@@ -1,5 +1,6 @@
 <?php
 
+use Brick\Math\BigInteger;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,6 +23,8 @@ class CreateKetUjianTable extends Migration
             $table->bigInteger('jml_soal');
             $table->bigInteger('dosen_id')->unsigned();
             $table->foreign('dosen_id')->references('id')->on('dosen');
+            $table->bigInteger('materi_id')->unsigned();
+            $table->foreign('materi_id')->references('id')->on('materi');
             $table->timestamps();
         });
     }

@@ -5,14 +5,14 @@
 @section('konten')
 
     <!-- Begin Page Content -->
-    <div class="container-fluid">
+    <div class="container-fluid" style="background-image: url('{{asset('asset/img/mahasiswa2.png')}}'); background-position: top-center; backgrounf-repeat: no-repeat; background-size: cover ;">
 
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Daftar Materi</h1>
         <p></p>
 
         <div class="row">
-        @if(count($materi) === 0)
+        @if(count($materi) === 0 )
             <!-- Earnings (Monthly) Card Example -->
                 <div class="col-xl-3 col-md-6 mb-4">
 

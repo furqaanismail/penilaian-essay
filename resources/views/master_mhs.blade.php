@@ -5,41 +5,6 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3">ESSAY</div>
-        </a>
-
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item">
-            <a class="nav-link" href="/mahasiswa/materi">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Baca Materi</span></a>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <li class="nav-item">
-            <a class="nav-link" href="/mahasiswa/ujian">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Ujian</span></a>
-        </li>
-
-
-    </ul>
-    <!-- End of Sidebar -->
-
 
 
     <!-- Content Wrapper -->
@@ -51,10 +16,7 @@
             <!-- Topbar -->
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
+                <input type="text" placeholder="Cari....">
 
 
                 <!-- Topbar Navbar -->

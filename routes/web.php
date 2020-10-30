@@ -19,40 +19,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'MainController@index');
 
-
-Route::prefix('admin')->group(function () {
-    //admin
-    Route::get('/', 'AdminController@index');
-    Route::get('auth', 'AdminController@auth');
-    Route::post('proses_login', 'AdminController@proses_login');
-    Route::get('logout', 'AdminController@logout');
-    Route::get('profile', 'AdminController@profile');
-
-    //dosen
-    Route::get('dosen', 'AdminDosenController@index');
-    Route::get('edit_dosen/{id}', 'AdminDosenController@show');
-    Route::put('update_dosen/{id}', 'AdminDosenController@update');
-    Route::get('delete_dosen/{id}', 'AdminDosenController@destroy');
-
-    //mahasiswa
-    Route::get('mahasiswa', 'AdminMahasiswaController@index');
-    Route::get('edit_mahasiswa/{id}', 'AdminMahasiswaController@show');
-    Route::put('update_mahasiswa/{id}', 'AdminMahasiswaController@update');
-    Route::get('delete_mahasiswa/{id}', 'AdminMahasiswaController@destroy');
-
-    //materi
-    Route::get('materi', 'AdminMateriController@index');
-    Route::get('edit_materi/{id}', 'AdminMateriController@show');
-    Route::put('update_materi/{id}', 'AdminMateriController@update');
-    Route::get('delete_materi/{id}', 'AdminMateriController@destroy');
-
-    //soal
-    Route::get('soal', 'AdminSoalController@index');
-    Route::get('edit_soal/{id}', 'AdminSoalController@show');
-    Route::put('update_soal/{id}', 'AdminSoalController@update');
-    Route::get('delete_soal/{id}', 'AdminSoalController@destroy');
-});
-
 Route::prefix('dosen')->group(function () {
     //dosen
     Route::get('/', 'DosenController@index');
@@ -65,13 +31,20 @@ Route::prefix('dosen')->group(function () {
 
     //soal
     Route::get('soal', 'DosenSoalController@index');
-    Route::get('create_soal', 'DosenSoalController@create');
-    Route::post('add_ujian', 'DosenSoalController@store');
+    Route::get('create_soal/{id}', 'DosenSoalController@create');
+    Route::post('add_ujian/{id}', 'DosenSoalController@store');
+    Route::get('edit_soal/{id}', 'DosenSoalController@show');
+    Route::put('update_soal/{id}', 'DosenSoalController@update');
+
 
     //materi
     Route::get('materi', 'DosenMateriController@index');
     Route::get('create_materi', 'DosenMateriController@create');
     Route::post('add_materi', 'DosenMateriController@store');
+    Route::get('detail_materi/{id}', 'DosenMateriController@detail_materi');
+    Route::put('update_materi/{id}', 'DosenMateriController@update');
+    Route::get('edit_materi/{id}', 'DosenMateriController@show');
+    Route::delete('delete_materi/{id}', 'DosenMateriController@destroy');
 
     //periksa nilai
     Route::get('periksa', 'DosenPeriksaController@index');

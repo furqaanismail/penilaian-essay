@@ -90,7 +90,10 @@ class MahasiswaController extends Controller
         if (Session::get('nim')) {
             $data = Materi::find($id);
             $dosen = Dosen::all();
-            return view('mahasiswa/detail_materi', ['materi' => $data, 'dosen' => $dosen]);
+            $ujian = KetUjian::where('materi_id', $data->id)->first();
+            $mhs = Session::get('nim');
+            $jawaban = Jawaban::where('mahasiswa_id', $mhs)->get();
+            return view('mahasiswa/detail_materi', ['materi' => $data, 'dosen' => $dosen, 'ujian' => $ujian, 'jawaban' => $jawaban]);
         } else {
             return redirect('mahasiswa/auth');
         }
@@ -163,6 +166,7 @@ class MahasiswaController extends Controller
             $kunci = $request->kunci;
 
             $sum = 0;
+            $nilai = new Nilai();
             for ($i = 1; $i <= $jml; $i++) {
                 // rumus vsm
                 similar_text($kunci[$i], $jawaban[$i],$persen);
@@ -171,12 +175,12 @@ class MahasiswaController extends Controller
                 $data->jawaban = $jawaban[$i];
                 $data->mahasiswa_id = Session::get('nim');
                 $data->nilai = $hsl;
+                $data->similaritas = $persen/100;
                 $data->ket_ujian_id = $no;
                 $data->save();
                 $sum+=$hsl;
             }
 
-            $nilai = new Nilai();
             $nilai->nilai = $sum;
             $nilai->mahasiswa_id = Session::get('nim');
             $nilai->ket_ujian_id = $no;

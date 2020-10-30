@@ -58,7 +58,20 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary float-right mr-2 mt-2">Tambah</button>
+                    <div class="form-group">
+                        <label class="d-block">Upload Image</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Upload</span>
+                            </div>
+                            <div class="custom-file">
+                            <input type="file" name="image" class="custom-file-input" id="inputGroupFile01">
+                                <label class="custom-file-label" for="inputGroupFile01">{{$materi->image}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary float-right mr-2 mt-2">Update</button>
                     <input type="hidden" value="{{ csrf_token() }}" name="_token">
 
                 </form>

@@ -21,6 +21,7 @@ class CreateJawabanTable extends Migration
             $table->string('ket_ujian_id');
             $table->foreign('ket_ujian_id')->references('no_ujian')->on('ket_ujian');
             $table->integer('nilai');
+            $table->string('similaritas', 200);
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@
 
             </div>
             <div class="card-body">
-                <form action="/dosen/add_ujian" method="post">
+            <form action="/dosen/add_ujian/{{$materi->id}}" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label class="">No Ujian</label>
